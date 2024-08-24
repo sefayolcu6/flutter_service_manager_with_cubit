@@ -6,7 +6,7 @@ import 'package:flutter_service_manager/feature/main_page/main_page_cubit/main_p
 
 class MainPageServicesCubit extends Cubit<MainPageState> with CubitProperties {
   MainPageServicesCubit() : super(MainPageServiceInitial());
-  HttpManager services = HttpManager();
+
   Future<void> getModalValues() async {
     emit(MainPageServiceLoading());
     await services
@@ -28,6 +28,7 @@ class MainPageServicesCubit extends Cubit<MainPageState> with CubitProperties {
 }
 
 mixin CubitProperties {
+  HttpManager services = HttpManager();
   PlaceHolderModel model =
       PlaceHolderModel(id: 0, userId: 0, title: "", body: "");
 }
