@@ -24,20 +24,29 @@ class _ServiceExpampleScreenState extends State<ServiceExpampleScreen>
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: Scaffold(body: BlocBuilder<MainPageServicesCubit, MainPageState>(
-        builder: (context, state) {
-          if (state is MainPageServiceLoading) {
-            return const Center(child:  RefreshProgressIndicator());
-          } else if (state is MainPageServiceSuccess) {
-            return Center(
-              child: Text(mainPageServicesCubit.model.body ?? ""),
-            );
-          } else if (state is MainPageServiceError) {
-            return const Text("Beklenmeyen Hata");
-          }
-          return const Center(child: Text("Beklenmeyen Hata"));
-        },
-      )),
+      debugShowCheckedModeBanner: false,
+      home: Scaffold(
+          appBar: AppBar(),
+          body: BlocBuilder<MainPageServicesCubit, MainPageState>(
+            builder: (context, state) {
+              if (state is MainPageServiceLoading) {
+                return const Center(child: RefreshProgressIndicator());
+              } else if (state is MainPageServiceSuccess) {
+                return Center(
+                    child: ListTile(
+                  leading: Text(
+                    mainPageServicesCubit.model.id.toString(),
+                    style: TextStyle(fontSize: 20),
+                  ),
+                  title: Text(mainPageServicesCubit.model.title.toString()),
+                  subtitle: Text(mainPageServicesCubit.model.body ?? ""),
+                ));
+              } else if (state is MainPageServiceError) {
+                return const Text("Beklenmeyen Hata");
+              }
+              return const Center(child: Text("Beklenmeyen Hata"));
+            },
+          )),
     );
   }
 }
