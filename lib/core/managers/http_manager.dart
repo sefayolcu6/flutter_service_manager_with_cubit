@@ -16,7 +16,7 @@ class HttpManager {
       throw Exception('API çağrısı başarısız oldu: ${response.statusCode}');
     }
   }
-
+ 
   Future<List<T>> getListFromApi<T>(
       {required String apiUrl,
       required T Function(Map<String, dynamic>) fromJson}) async {
